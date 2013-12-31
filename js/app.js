@@ -16,9 +16,31 @@ $(document).ready(function(){
 		return false;
 	})
 
+	$(window).on("scroll", function(){
+		var position = $(document).scrollTop();
+		var menu_pos = $("#above-menu-bar").offset().top;
+		var class_name = "fixed contain-to-grid";
+		console.log(position);
+		console.log(menu_pos);
+		if(position >= menu_pos * 2){
+			$("#menu-bar").addClass(class_name);
+			toggle_site_name("block");
+		}
+		if(position < menu_pos * 2){
+			$("#menu-bar").removeClass(class_name);
+			toggle_site_name("none");
+		}
+	})
+
 });
 
 var timer_diff = function(d1, d2){
 	diff = Math.abs(d1 - d2) / 86400000
 	return Math.round(diff)
 };
+
+var toggle_site_name = function(property){
+	$("#site-name").css({
+		display: property
+	})
+}
